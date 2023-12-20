@@ -1,40 +1,41 @@
 import qrcode
 from PIL import Image
 
-# Your Google Maps link
+# Your link
 google_maps_link = "https://en.wikipedia.org/wiki/Cat"
 
 FILL_COLOR = "brown"
 BACK_COLOR = "white"
 
-# Generate QR code with larger box size and higher error correction
+# Generate QR code
 qr = qrcode.QRCode(
-    version=1,  # Automatically adjusted if necessary
-    error_correction=qrcode.constants.ERROR_CORRECT_H,  # Higher error correction
-    box_size=20,  # Larger box size
-    border=4,  # Border size
+    version=1,
+    error_correction=qrcode.constants.ERROR_CORRECT_H,
+    box_size=20,
+    border=4,
 )
 qr.add_data(google_maps_link)
 qr.make(fit=True)
 
-# Set the fill color to red and background to black
 img = qr.make_image(fill_color=FILL_COLOR, back_color=BACK_COLOR)
 
-# Optional: Embed a logo or image in the bottom right corner
-# Uncomment and adjust the following lines if you want to include a logo
-# LOGO_HEIGHT = 450
-# LOGO_WIDTH = 450
+# Optional if needed to add logo in right bottom corner
+#LOGO_SIZE = 450  # Adjust the size of the logo
 
-#logo = Image.open("qr2.jpg")  # Replace with the path to your logo
-#logo.thumbnail((LOGO_HEIGHT, LOGO_WIDTH))  # Resize logo. Adjust the size as needed
+#logo = Image.open("qr3.jpg")  # Replace with the path to your logo
+#logo.thumbnail((LOGO_SIZE, LOGO_SIZE))  # Resize logo
 
-#Calculate logo position for bottom right corner
-#logo_x_position = img.size[0] - logo.size[0] - 10  # 10 pixels from the right edge
-#logo_y_position = img.size[1] - logo.size[1] - 10  # 10 pixels from the bottom edge
-#logo_position = (logo_x_position, logo_y_position)
+# Check if the logo has an alpha channel
+#if logo.mode in ('RGBA', 'LA'):
+#    logo_mask = logo.split()[-1]
+#else:
+#    logo_mask = None
 
-# Paste the logo onto the QR code
-#img.paste(logo, logo_position)
+# Calculate logo position for the bottom right corner
+#logo_position = (img.size[0] - logo.size[0], img.size[1] - logo.size[1])
+
+# Paste the logo onto the QR code using the correct mask
+#img.paste(logo, logo_position, logo_mask)
 
 # Save the QR code as an image file
-img.save("QR Code.png")
+img.save("QR in right bottom corner.png")
