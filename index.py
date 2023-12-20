@@ -2,7 +2,7 @@ import qrcode
 from PIL import Image
 
 # Your link
-google_maps_link = "https://en.wikipedia.org/wiki/Cat"
+link = "https://en.wikipedia.org/wiki/Cat"
 
 FILL_COLOR = "brown"
 BACK_COLOR = "white"
@@ -14,7 +14,7 @@ qr = qrcode.QRCode(
     box_size=20,
     border=4,
 )
-qr.add_data(google_maps_link)
+qr.add_data(link)
 qr.make(fit=True)
 
 img = qr.make_image(fill_color=FILL_COLOR, back_color=BACK_COLOR)
